@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
-import { FacebookShareButton, TwitterShareButton, FacebookIcon, TwitterIcon } from 'react-share';
+import React, { useState, useEffect } from 'react';
+import { FacebookShareButton, TwitterShareButton } from 'react-share';
+import { FaFacebook, FaTwitter } from 'react-icons/fa'; // Correct import for icons
 import Spinner from './components/Spinner';
-import { FaFacebook, FaTwitter } from 'react-icons/fa';
+import YouTube from 'react-youtube'; // Import react-youtube
 
 function App() {
   const [selectedSkill, setSelectedSkill] = useState(null);
@@ -12,11 +13,23 @@ function App() {
 
   const skills = ['React', 'Node.js', 'MongoDB', 'CSS', 'JavaScript', 'Python', 'Machine Learning', 'UI/UX Design', 'Git', 'SQL'];
 
-  // Function to select a skill after the spin
+  // Mapping skills to YouTube video IDs
+  const videoMappings = {
+    React: 'Jb2pOgAkqXM', // Example React video ID
+    'Node.js': 'TlB_eWDSMt4', // Example Node.js video ID
+    MongoDB: 'O8Q7A1d0W50', // Example MongoDB video ID
+    CSS: '1RsCNv65bT8', // Example CSS tutorial video ID
+    JavaScript: 'upDLF7iOwmw', // Example JavaScript video ID
+    Python: 'rfscVS0vtbw', // Example Python tutorial video ID
+    'Machine Learning': 'Cr6VqTRO1v0', // Example ML video ID
+    'UI/UX Design': 'LzpQQe6A6Wk', // Example UI/UX Design video ID
+    Git: 'SWYqp7iY_Tc', // Example Git video ID
+    SQL: '7S_tz1z_5bA', // Example SQL tutorial video ID
+  };
+
   const handleSkillSelection = (skill) => {
     setIsLoading(true);
     setTimeout(() => {
-      // Save selected skill and today's date to localStorage
       localStorage.setItem('skillOfTheDay', skill);
       localStorage.setItem('dateOfSpin', new Date().toDateString());
 
@@ -33,17 +46,15 @@ function App() {
       }
       localStorage.setItem('streak', newStreak);
 
-      // Update state
       setSelectedSkill(skill);
       setHasSpunToday(true);
       setHistory(newHistory);
       setStreak(newStreak);
       setIsLoading(false);
-    }, 1000); // Simulate a delay for the loading spinner
+    }, 1000); // Simulate loading delay
   };
 
   useEffect(() => {
-    // Retrieve data from localStorage on initial load
     const storedSkill = localStorage.getItem('skillOfTheDay');
     const storedDate = localStorage.getItem('dateOfSpin');
     const storedHistory = JSON.parse(localStorage.getItem('challengeHistory')) || [];
@@ -74,6 +85,26 @@ function App() {
         </div>
       ) : (
         <p className="text-white mt-4 text-center">Spin to get your challenge for today!</p>
+      )}
+
+      {/* YouTube Video Section */}
+      {selectedSkill && (
+        <div className="mt-8 w-full max-w-3xl">
+          <h2 className="text-2xl font-semibold mb-4 text-white">Learn more about {selectedSkill}:</h2>
+          <YouTube
+            videoId={videoMappings[selectedSkill]}
+            opts={{
+              height: '390',
+              width: '640',
+              playerVars: {
+                autoplay: 1, // Enable autoplay if you want
+                controls: 1,
+                modestbranding: 1,
+                rel: 0,
+              },
+            }}
+          />
+        </div>
       )}
 
       {/* Challenge History */}

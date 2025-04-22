@@ -8,7 +8,7 @@ const skills = [
   "Write a haiku",
   "Draw your favorite food",
   "Build a CSS button",
-  "Meditate for 5 mins",
+  "Meditate for 15 mins",
   "Take a tech quiz",
   "Try a yoga pose"
 ];

@@ -6,7 +6,7 @@ const skills = [
   "Learn 5 Spanish words",
   "Try an origami animal",
   "Write a haiku",
-  "Draw your favorite food",/
+  "Draw your favorite food",
   "Build a CSS button",
   "Meditate for 5 mins",
   "Take a tech quiz",

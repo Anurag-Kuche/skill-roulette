@@ -3,7 +3,7 @@ import './Spinner.css';
 
 // List of skills
 const skills = [
-  "Learn 5 Spanish words",
+  "Learn 6 Spanish words",
   "Try an origami animal",
   "Write a haiku",
   "Draw your favorite food",
